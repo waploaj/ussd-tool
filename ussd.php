@@ -116,3 +116,21 @@ function sendTerminalCommand($command)
   fclose($fp);
   
   return $command ? $answer : NULL;
+  }
+function getString($fp)
+{
+  $string = "";
+  $ending="\n";
+  
+  do
+  {
+    $char = fgetc($fp);
+    if($ending[0] == $char)
+      $ending = substr($ending, 1);  
+    if($char != "\r" && $char != "\n")
+      $string .= $char;
+  }
+  while(strlen($ending));
+  
+  return $string;
+}
