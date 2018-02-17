@@ -63,3 +63,20 @@ function runUSSD($command)
     }
   }
 }
+function str2pdu($command)
+{
+  $bin = "";
+  for($i = 0; $i < strlen($command); $i++)
+    $bin .= strrev(sprintf("%07b", ord($command[$i])));
+    
+  $bin .= str_repeat("0", 8 - strlen($bin) % 8);
+  $pdu = "";
+  while(strlen($bin))
+  {
+    $symbol = substr($bin, 0, 8);
+    $symbol = strrev($symbol);
+    $bin = substr($bin, 8);
+    $pdu .= binhex(substr($symbol,0,4)).binhex(substr($symbol,4));
+  }
+  return $pdu;
+}
