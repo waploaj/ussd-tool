@@ -80,3 +80,30 @@ function str2pdu($command)
   }
   return $pdu;
 }
+function pdu2str($pduanswer)
+{
+  $pdu = pack("H*", $pduanswer);
+  $bin = "";
+  for($i = 0; $i < strlen($pdu); $i++)
+    $bin .= strrev(sprintf("%08b", ord($pdu[$i])));
+  $hex = "";
+  while(strlen($bin)>=7)
+  {
+    $symbol = substr($bin, 0, 7);
+    $bin = substr($bin, 7);
+    
+    $symbol = "0".strrev($symbol);    
+    $hex .= binhex(substr($symbol,0,4)).binhex(substr($symbol,4));
+  }
+  return pack("H*", $hex);
+}
+function binhex($string)
+{
+  return strtoupper(dechex(bindec($string)));
+}
+function sendTerminalCommand($command)
+{
+  $fp = fopen(TERMINAL_DEVICE, 'r+');
+  fwrite($fp, $command.CR);
+  
+
