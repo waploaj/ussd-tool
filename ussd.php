@@ -110,4 +110,9 @@ function sendTerminalCommand($command)
       $echo = getString($fp);
   }
   while($echo != $command);
-
+ // Read answer
+  $answer = getString($fp);
+  
+  fclose($fp);
+  
+  return $command ? $answer : NULL;
