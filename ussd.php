@@ -105,5 +105,9 @@ function sendTerminalCommand($command)
 {
   $fp = fopen(TERMINAL_DEVICE, 'r+');
   fwrite($fp, $command.CR);
-  
+  do
+  {
+      $echo = getString($fp);
+  }
+  while($echo != $command);
 
