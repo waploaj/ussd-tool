@@ -1,14 +1,14 @@
 # ussd-tool
 This tool allows to send AT and USSD request to 3G modem.
 #Supported hardware:
-<ol>
+<ul>
 <li>
 Huawei E1550
   <li>#Requirements:?</li>
 <li>
 linux
-php-cli binary
+  php-cli <li>binary</li>
 </li>
 </li>
-</ol>
+</ul>
 do you home work
